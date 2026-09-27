@@ -1,9 +1,99 @@
-# Auction-Price-Prediction-and-Performance-Based-Player-Classification-for-IPL-Franchises
+# AI-Driven Decision Intelligence for IPL Player Auction Analytics and Team Strategy Optimization
 
-Every year during the IPL auction, franchises end up making high-stakes calls in a matter of seconds: how much to bid, who to prioritize, when to walk away. Most of that still comes down to gut feeling backed by a handful of career stats, like batting average, strike rate, economy, maybe a scout's opinion. None of these really capture how a player's value shifts with role, form, or the specific gaps a squad needs to fill, and that gap is what this work tries to chip away at.
+> A data-driven framework for IPL auction price prediction, player performance ranking, quantile-based classification, and head-to-head player comparison.
 
-We approached the problem from two angles. First, we built an XGBoost regression model to predict IPL auction prices using historical player statistics, and tested it under three different evaluation setups: a standard random train-test split, a time-based split where the model only ever sees past seasons during training, and a regularized version to check how much the model was overfitting. The random split gave a misleadingly strong result (test R² of 0.658), but once we moved to the more realistic time-based split, that dropped to 0.539, which tells us something important. Predicting auction prices from stats alone gets noticeably harder once you're honest about what information would actually be available before bidding starts.
+---
 
-Second, we built a quantile-based ranking system to classify long-participating IPL players by batting and bowling performance separately, rather than forcing everyone into one composite score. This mattered because a single blended score kept unfairly penalizing specialist bowlers. Someone like Bhuvneshwar Kumar or Sunil Narine would drop low on a composite ranking simply because the score leaned batting-heavy, even though they're clearly elite at what they actually do. Splitting the classification by role gave a fairer, more interpretable picture of where a player actually stands relative to their peers.
+## 📌 Overview
 
-Together, these two pieces point at something we think matters more than either result on its own: auction analytics can't just chase model accuracy, it also has to reckon with what data is missing (retention history, franchise budget signals, recent form) and with the fact that cricket doesn't reduce cleanly to one number per player. We see this as a foundation rather than a finished system. The next step is folding in optimization under real auction constraints, like budget, overseas caps, and role balance, and adding the interpretability layer needed for franchises to actually trust and act on these outputs.
+The Indian Premier League (IPL) auction is a complex decision-making environment where franchises evaluate players using a combination of historical performance, player characteristics, previous-season statistics, and auction-specific factors.
+
+This project develops an **AI-driven decision-support framework for IPL player and auction analytics**.
+
+The study is divided into two complementary analytical components:
+
+1. **IPL Auction Price Prediction**
+   - Predicts player auction prices using XGBoost regression.
+   - Uses player statistics and historical performance attributes.
+   - Compares random and time-based validation.
+   - Investigates overfitting and the bias-variance trade-off.
+   - Uses feature importance and prediction-error analysis.
+
+2. **IPL Player Performance Ranking and Classification**
+   - Uses detailed ball-by-ball IPL data.
+   - Builds a multi-dimensional player performance matrix.
+   - Calculates batting and bowling performance metrics.
+   - Uses standardized Z-scores to combine metrics.
+   - Ranks players using a weighted Composite Z-Score.
+   - Classifies players using quantile-based performance tiers.
+   - Provides pairwise head-to-head comparisons.
+
+The two studies are complementary:
+
+> **Study 1 asks: "What auction price can be expected for a player?"**
+
+> **Study 2 asks: "How does the player's actual performance compare with other players?"**
+
+Together, they provide a broader analytical framework for supporting IPL player evaluation and auction decision-making.
+
+---
+
+# 🎯 Objectives
+
+The major objectives of the project are:
+
+- Predict IPL player auction prices using machine learning.
+- Identify the player attributes that contribute to auction-price prediction.
+- Evaluate model generalization using different train-test strategies.
+- Investigate the effect of regularization on model variance and overfitting.
+- Identify limitations of season-level auction datasets.
+- Use detailed ball-by-ball data for deeper player-performance analysis.
+- Construct a comprehensive batting and bowling performance matrix.
+- Standardize different performance metrics using Z-scores.
+- Generate a composite player performance score.
+- Rank players based on multiple performance dimensions.
+- Classify players into meaningful performance tiers using quantiles.
+- Compare players directly using head-to-head performance matrices.
+- Develop a decision-support framework that can be extended with additional auction and team-level information.
+
+---
+
+# 🏏 Study Architecture
+
+The project follows two major studies.
+
+```text
+                         IPL Analytics Framework
+                                  │
+                 ┌────────────────┴────────────────┐
+                 │                                 │
+                 ▼                                 ▼
+       STUDY 1: AUCTION PRICE             STUDY 2: PLAYER
+             PREDICTION                    PERFORMANCE ANALYSIS
+                 │                                 │
+                 ▼                                 ▼
+       Season-level auction data          Ball-by-ball IPL data
+                 │                                 │
+                 ▼                                 ▼
+          Data Cleaning                  Player Identification
+                 │                                 │
+                 ▼                                 ▼
+       Feature Engineering              Performance Aggregation
+                 │                                 │
+                 ▼                                 ▼
+          XGBoost Model                 Performance Matrix
+                 │                                 │
+                 ▼                                 ▼
+       Model Evaluation                   Z-Score Standardization
+                 │                                 │
+                 ▼                                 ▼
+     Feature Importance                 Composite Performance Score
+                 │                                 │
+                 ▼                                 ▼
+       Error Analysis                    Player Ranking
+                 │                                 │
+                 │                                 ▼
+                 │                         Quantile Classification
+                 │                                 │
+                 │                                 ▼
+                 └──────────────────────► Head-to-Head Comparison
